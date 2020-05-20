@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-widths, initial-scale=1.0" />
+    <title>trello</title>
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="header__title">Kanban board</h1>
+    </header>
+    <main class="mainWrapper">
+      <div class="column">
+        <h2 class="column__title">Новая колонка</h2>
+        <div class="column__interactionPanel interactionPanel">
+          <button class="interactionPanel__button editButton">
+            &#9998;
+          </button>
+          <button class="interactionPanel__button removeButton" data-id="0">
+            &#10006;
+          </button>
+        </div>
+        <div class="column__taskWrapper">
+          <div class="column__task task">
+            <div class="task__interactionPanel interactionPanel">
+              <button class="interactionPanel__button editButton" data-id="0">
+                &#9998;
+              </button>
+              <button class="interactionPanel__button removeButton">
+                &#10006;
+              </button>
+            </div>
+            <p class="task__title">Досмотреть с Дашей мультик</p>
+          </div>
+          <div class="column__task task">
+            <div class="task__interactionPanel interactionPanel">
+              <button class="interactionPanel__edit">&#9998;</button>
+            </div>
+            <p class="task__title">Досмотреть с Дашей мультик</p>
+          </div>
+          <div class="column__task task">
+            <div class="task__interactionPanel interactionPanel">
+              <button class="interactionPanel__edit">&#9998;</button>
+            </div>
+            <p class="task__title">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
+              accusantium officia reprehenderit, similique quas molestias
+              necessitatibus odit fuga accusamus magni labore omnis libero eius
+              commodi sit, nobis hic atque iusto tempora culpa! Vel, ipsa?
+              Facilis, quo ducimus. Explicabo doloribus ex eaque?
+            </p>
+          </div>
+          <div class="column__task task">
+            <div class="task__interactionPanel interactionPanel">
+              <button class="interactionPanel__edit">&#9998;</button>
+            </div>
+            <p class="task__title">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
+              accusantium officia reprehenderit, similique quas molestias
+              necessitatibus odit fuga accusamus magni labore omnis libero eius
+              commodi sit, nobis hic atque iusto tempora culpa! Vel, ipsa?
+              Facilis, quo ducimus. Explicabo doloribus ex eaque?
+            </p>
+          </div>
+          <div class="column__task task">
+            <div class="task__interactionPanel interactionPanel">
+              <button class="interactionPanel__edit">&#9998;</button>
+            </div>
+            <p class="task__title">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
+              accusantium officia reprehenderit, similique quas molestias
+              necessitatibus odit fuga accusamus magni labore omnis libero eius
+              commodi sit, nobis hic atque iusto tempora culpa! Vel, ipsa?
+              Facilis, quo ducimus. Explicabo doloribus ex eaque?
+            </p>
+          </div>
+          <div class="column__task task">
+            <div class="task__interactionPanel interactionPanel">
+              <button class="interactionPanel__edit">&#9998;</button>
+            </div>
+            <p class="task__title">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
+              accusantium officia reprehenderit, similique quas molestias
+              necessitatibus odit fuga accusamus magni labore omnis libero eius
+              commodi sit, nobis hic atque iusto tempora culpa! Vel, ipsa?
+              Facilis, quo ducimus. Explicabo doloribus ex eaque?
+            </p>
+          </div>
+        </div>
+        <button class="column__addTask">+ Добавить еще одну карточку</button>
+      </div>
+      <div class="newColumnWrapper">
+        <div class="column newColumn" tabindex="1">
+          <h2 class="column__title">+ Добавить еще одну колонку</h2>
+        </div>
+      </div>
+    </main>
+    <script src="../dist/index.js"></script>
+  </body>
+</html>
