@@ -7,7 +7,7 @@ export const openAddPanels = () => {
     ".newColumn__inputPanelWrap"
   );
   const newColumnInputPanelInput = document.querySelectorAll(
-    ".newColumn__inputPanelWrap input"
+    ".newColumn__inputPanelWrap textarea"
   );
   const closeNewColumnInputPanel = document.querySelectorAll(
     ".newColumn__inputPanelWrap .cancel"

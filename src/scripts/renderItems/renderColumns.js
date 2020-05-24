@@ -5,7 +5,7 @@ export const renderColumns = (columns) => {
     div.classList.add("column");
     newColumn.insertAdjacentHTML(
       "beforebegin",
-      `<div class='column' id=${id}>
+      `<div class='column' id=${id} draggable="true">
        <div class="column__editColumnTitlePanel editColumnTitlePanel">
           <div class="column__titleWrap">
             <h2 class="column__title">${title}</h2>

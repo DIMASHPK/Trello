@@ -6,8 +6,8 @@ import { removeItems } from "./removeItems/removeFunc";
 import { initEditItems } from "./editItems/editItemsInit";
 import { openEditPanels } from "./openAddingPanel/openEditPanels/openEditPanels";
 import { openAddPanels } from "./openAddingPanel/openAddPanel/openAddPanel";
-import { editTasks, editColumns } from "./editItems/editItems";
 import { addItemsInit } from "./addingItems/addingItems";
+import { dragTasks, dragColumns } from "./dragItems/dragItems";
 
 export const columns = [
   {
@@ -21,6 +21,10 @@ export const columns = [
   {
     id: 3,
     title: "Новая два колонка",
+  },
+  {
+    id: 4,
+    title: "Клонка для драга",
   },
 ];
 export const tasks = [
@@ -120,3 +124,10 @@ openEditPanels();
 
 /* edit items */
 initEditItems();
+
+/* drag and drop items */
+const taskList = document.querySelectorAll(".task");
+dragTasks(taskList);
+
+const columnsList = document.querySelectorAll(".column[draggable='true']");
+dragColumns(columnsList);

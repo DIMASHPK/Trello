@@ -4,6 +4,7 @@ import { tasks } from "../..";
 import { addNewTask } from "../addingTasks/addingTasks";
 import { removeColumn } from "../../removeItems/removeFunc";
 import { editColumns } from "../../editItems/editItems";
+import { dragColumns } from "../../dragItems/dragItems";
 
 const closePanelAfterAdding = () => {
   const openNewColumnInputPanel = document.querySelector(".newColumn h2");
@@ -91,6 +92,14 @@ const editColumnTitle = (columns) => {
   editColumns(editColumnInput, editColumnButton, columns);
 };
 
+const dragNewColumns = (columns) => {
+  const column = document.querySelectorAll(
+    `div.column[id="${columns.length}"]`
+  );
+
+  dragColumns(column);
+};
+
 export const callBackFunction = (columns) => {
   closePanelAfterAdding();
   removeNewColumn(columns);
@@ -98,4 +107,5 @@ export const callBackFunction = (columns) => {
   addNewTaskToNewColumn(columns);
   openEditPanel(columns);
   editColumnTitle(columns);
+  dragNewColumns(columns);
 };

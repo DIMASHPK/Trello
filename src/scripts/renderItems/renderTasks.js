@@ -7,7 +7,7 @@ export const renderTasks = (tasks) => {
         if (taskWrapper.id == columnId) {
           taskWrapper.insertAdjacentHTML(
             "beforeend",
-            `<div class="column__task task" id=${id}>
+            `<div class="column__task task" id=${id} draggable="true">
              <div class="task__wrapper">   
               <div class="task__interactionPanel interactionPanel">
                 <button class="interactionPanel__button editButton">&#9998;</button>

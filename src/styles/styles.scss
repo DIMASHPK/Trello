@@ -40,6 +40,16 @@ body {
     border-radius: 5px;
   }
   & .column {
+    transition: 0.3s;
+    &.dragstart {
+      border: 1px dashed black;
+      opacity: 0.5;
+    }
+    &.dragover {
+      transition: 0.3s;
+      transform: translateY(20px);
+      box-shadow: 1px 1px 5px 2px rgba(255, 255, 255, 0.65);
+    }
     border-radius: 5px;
     max-height: calc(100vh - 96px);
     width: 260px;
@@ -57,7 +67,7 @@ body {
       opacity: 0;
       width: 100%;
       padding: 2px;
-      z-index: 9999;
+      z-index: -1;
       transition: 0.3s;
       & button {
         background: none;
@@ -65,7 +75,7 @@ body {
         cursor: pointer;
         padding: 1px;
         font-size: 18px;
-        color: #6b808c;
+        color: #fff;
         border-radius: 5px;
       }
       & .interactionPanel__button {
@@ -74,6 +84,11 @@ body {
           color: #000;
           background-color: rgba(0, 0, 0, 0.15);
         }
+      }
+    }
+    & .column__interactionPanel {
+      button {
+        color: #6b808c;
       }
     }
 
@@ -172,9 +187,31 @@ body {
       }
       & .column__task {
         position: relative;
+        transition: 0.3s;
+        &.dragstart:hover {
+          p {
+            border: 1px dashed black;
+            color: rgba(0, 0, 0, 0);
+            background: none;
+            transition: 0.3s;
+          }
+        }
+        &.dragover {
+          opacity: 0.5;
+          transition: 0.3s;
+          p {
+            border: 1px dashed black;
+            box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.5);
+            transition: 0.3s;
+          }
+        }
         &:hover {
+          p {
+            background: #6b808c;
+          }
           & .interactionPanel {
             opacity: 1;
+            z-index: 9999;
           }
         }
       }
@@ -199,15 +236,12 @@ body {
         margin-bottom: 8px;
         box-shadow: 1px 1px 7px 0px rgba(0, 0, 0, 0.15);
         word-break: break-all;
+        transition: 0.3s;
       }
       & .editTaskPanel__wrapper {
-        height: 0px;
-        transition: 0.3s;
-        overflow: hidden;
+        display: none;
         &.openInputPanel {
-          overflow: visible;
-          height: auto;
-          transition: 0.3s;
+          display: block;
         }
         & .editTaskPanel__textarea {
           padding: 8px 12px;
@@ -267,6 +301,7 @@ body {
       cursor: pointer;
       & .column__interactionPanel {
         top: 0;
+        z-index: 9999;
       }
     }
     & .addTaskPanel {
