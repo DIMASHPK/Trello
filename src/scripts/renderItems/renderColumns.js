@@ -1,5 +1,6 @@
 export const renderColumns = (columns) => {
   const newColumn = document.querySelector(".newColumnWrapper");
+  
   (Array.isArray(columns) ? columns : [columns]).forEach(({ id, title }) => {
     const div = document.createElement("div");
     div.classList.add("column");

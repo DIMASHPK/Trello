@@ -20,6 +20,7 @@ const removeNewColumn = (columns) => {
   const lastColumnRemovButton = document.querySelectorAll(
     `.column__interactionPanel button[data-id="${columns.length}"]`
   );
+  
   removeColumn(lastColumnRemovButton, columns);
 };
 

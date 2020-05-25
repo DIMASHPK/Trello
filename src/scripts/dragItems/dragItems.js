@@ -4,22 +4,19 @@ let dropedColumn = null;
 
 export const dragColumns = (columns) => {
   [...columns].forEach((column) => {
+    const tasks = document.querySelectorAll(".task")
+    
     column.addEventListener("dragstart", function (e) {
-      e.stopPropagation();
       dragedColumn = this;
       this.classList.add("dragstart");
-      document
-        .querySelectorAll(".task")
-        .forEach((task) => task.removeAttribute("draggable"));
+      tasks.forEach((task) => task.removeAttribute("draggable"));
     });
 
     column.addEventListener("dragend", function () {
       dragedColumn.classList.remove("dragstart");
       dragedColumn = null;
       columns.forEach((column) => column.classList.remove("dragover"));
-      document
-        .querySelectorAll(".task")
-        .forEach((task) => task.setAttribute("draggable", "true"));
+      tasks.forEach((task) => task.setAttribute("draggable", "true"));
     });
 
     column.addEventListener("dragover", function (e) {
@@ -45,7 +42,7 @@ export const dragColumns = (columns) => {
       if (dragedTask) {
         column.querySelector(".column__taskWrapper").append(dragedTask);
       } else if (dragedColumn) {
-        const columns = [...document.querySelectorAll(".column")];
+        const columns = [...document.querySelectorAll(".column[draggable='true']") ]; 
         const indexA = columns.indexOf(this);
         const indexB = columns.indexOf(dragedColumn);
 

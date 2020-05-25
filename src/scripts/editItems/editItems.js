@@ -7,6 +7,10 @@ export const editItems = (inputs, editButtons, arrayOfItems, callback) => {
           dataset: { id },
         },
       }) => {
+        if(inputs[i].value.length < 1){
+          alert('Поле не должно быть пустым')
+          return
+        }
         arrayOfItems = arrayOfItems.map((item) =>
           item.id == id ? { ...item, title: inputs[i].value } : item
         );

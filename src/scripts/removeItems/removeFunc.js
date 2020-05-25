@@ -1,11 +1,11 @@
 import { tasks, columns } from "..";
 
-const removeFunc = (dataset, removeNode, removeItems) => {
+const removeFunc = ({target}, removeItems, selector) => {
   let confirmQuestion = confirm("You want remove this item");
   confirmQuestion &&
     (removeItems = removeItems.filter(({ id }) => {
-      removeNode.remove();
-      return id != dataset.id;
+      target.closest(`${selector}`).remove();
+      return id != target.dataset.id;
     }));
 };
 
@@ -13,14 +13,7 @@ export const removeTask = (buttons, items) => {
   buttons.forEach((button) => {
     button.addEventListener(
       "click",
-      ({
-        target: {
-          dataset,
-          parentNode: {
-            parentNode: { parentNode },
-          },
-        },
-      }) => removeFunc(dataset, parentNode, items)
+      (e) => removeFunc(e, items, '.task')
     );
   });
 };
@@ -29,16 +22,7 @@ export const removeColumn = (buttons, items) => {
   buttons.forEach((button) => {
     button.addEventListener(
       "click",
-      ({
-        target: {
-          dataset,
-          parentNode: {
-            parentNode: {
-              parentNode: { parentNode },
-            },
-          },
-        },
-      }) => removeFunc(dataset, parentNode, items)
+      (e) => removeFunc(e, items, '.column')
     );
   });
 };

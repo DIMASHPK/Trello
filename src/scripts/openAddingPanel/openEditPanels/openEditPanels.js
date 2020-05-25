@@ -23,7 +23,8 @@ export const openEditPanels = () => {
     editColumnTitleInputPanel,
     closeEditColumnTitleInputPanel,
     editColumnTitleInputPanelInput,
-    titleEditPanel
+    titleEditPanel,
+    true
   );
 
   const openEditTaskPanel = document.querySelectorAll(
@@ -47,6 +48,7 @@ export const openEditPanels = () => {
     editTaskTitlePanel,
     closeEditTaskPanel,
     editTaskPanelTextarea,
-    taskContentWrap
+    taskContentWrap,
+    true
   );
 };

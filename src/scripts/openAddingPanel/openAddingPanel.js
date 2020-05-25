@@ -5,7 +5,8 @@ export const openAddingPanel = (
   inputPanel,
   forClosePanelElem,
   input,
-  titleEditPanel
+  titleEditPanel,
+  forEdit = false
 ) => {
   /* open input panel*/
   forOpenPanelElem.forEach((itemOpen, i) => {
@@ -15,7 +16,7 @@ export const openAddingPanel = (
       );
       inputPanel[i].classList.add("openInputPanel");
       input[i].focus();
-      firstPartOfInitEditPanel();
+      forEdit && firstPartOfInitEditPanel();
     });
   });
   /* close input panel */
