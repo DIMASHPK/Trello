@@ -78,7 +78,8 @@ const openEditPanel = (columns) => {
     editColumnTitleInputPanel,
     closeEditColumnTitleInputPanel,
     editColumnTitleInputPanelInput,
-    titleEditPanel
+    titleEditPanel,
+    true
   );
 };
 

@@ -45,7 +45,8 @@ const openEditPanel = (columnId) => {
     editColumnTaskInputPanel,
     closeEditColumnTaskInputPanel,
     editColumnTaskInputPanelInput,
-    taskEditPanel
+    taskEditPanel,
+    true
   );
 };
 
