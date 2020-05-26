@@ -1,7 +1,6 @@
-import { openAddingPanel } from "../openAddingPanel";
+import { openAddingPanel } from "../../helpers/openAddingPanel";
 
-/* open edit panels */
-export const openEditPanels = () => {
+export const openEditColumnPanel = () => {
   const openEditColumnTitlePanel = document.querySelectorAll(
     ".column__interactionPanel .editButton"
   );
@@ -24,31 +23,6 @@ export const openEditPanels = () => {
     closeEditColumnTitleInputPanel,
     editColumnTitleInputPanelInput,
     titleEditPanel,
-    true
-  );
-
-  const openEditTaskPanel = document.querySelectorAll(
-    ".task__interactionPanel .editButton"
-  );
-  const editTaskTitlePanel = document.querySelectorAll(
-    ".editTaskPanel__wrapper"
-  );
-  const taskContentWrap = document.querySelectorAll(
-    ".column__task .task__wrapper "
-  );
-  const editTaskPanelTextarea = document.querySelectorAll(
-    ".editTaskPanel__wrapper textarea"
-  );
-  const closeEditTaskPanel = document.querySelectorAll(
-    ".editTaskPanel__button.cancel"
-  );
-
-  openAddingPanel(
-    openEditTaskPanel,
-    editTaskTitlePanel,
-    closeEditTaskPanel,
-    editTaskPanelTextarea,
-    taskContentWrap,
     true
   );
 };

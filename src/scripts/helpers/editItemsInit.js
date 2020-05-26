@@ -1,6 +1,3 @@
-import { editTasks, editColumns } from "./editItems";
-import { tasks, columns } from "..";
-
 const resizeItems = (input) => {
   input.addEventListener("input", ({ target: { style, scrollHeight } }) => {
     style.height = scrollHeight + "px";
@@ -16,7 +13,7 @@ const editItems = (inputs, items) => {
   });
 };
 
-export const firstPartOfInitEditPanel = () => {
+export const contentAndResizeOfEditItem = () => {
   const columnsTitle = document.querySelectorAll(".column h2");
   const columnsInputs = document.querySelectorAll(
     "textarea.editColumnTitlePanel__input"
@@ -30,28 +27,4 @@ export const firstPartOfInitEditPanel = () => {
 
   editItems(columnsInputs, columnsTitle);
   editItems(tasksInputs, tasksContent);
-};
-
-const secondPartOfInitEditPanel = () => {
-  const editTasksInputs = document.querySelectorAll(
-    "textarea.editTaskPanel__textarea"
-  );
-  const editTasksButtons = document.querySelectorAll(
-    ".editTaskPanel__button.editTask"
-  );
-
-  const editColumnInputs = document.querySelectorAll(
-    "textarea.editColumnTitlePanel__input"
-  );
-  const editColumnButtons = document.querySelectorAll(
-    ".column  .editColumnTitlePanel__button.ediTitle"
-  );
-
-  editTasks(editTasksInputs, editTasksButtons, tasks);
-  editColumns(editColumnInputs, editColumnButtons, columns);
-};
-
-export const initEditItems = () => {
-  firstPartOfInitEditPanel();
-  secondPartOfInitEditPanel();
 };

@@ -1,7 +1,8 @@
-import { removeTask } from "../../removeItems/removeFunc";
-import { editTasks } from "../../editItems/editItems";
-import { openAddingPanel } from "../../openAddingPanel/openAddingPanel";
-import { dragTasks } from "../../dragItems/dragItems";
+import { removeTask } from "../removeTask/removeTask";
+import { openAddingPanel } from "../../helpers/openAddingPanel";
+import { editTask } from "../editTask/editTask";
+import { dragTask } from "../dragTask/dragTask";
+import { dragColumn } from "../../columns/dragColumn/dragColumn";
 
 const closePanelAfterAdd = (columnId) => {
   const closeNewTaskInputPanel = document.querySelector(
@@ -57,12 +58,12 @@ const editColumnTask = (columnId, tasks) => {
   const editColumnButton = document.querySelectorAll(
     `div.column[id="${columnId}"]  .editTaskPanel__button.editTask`
   );
-  editTasks(editColumnInput, editColumnButton, tasks);
+  editTask(editColumnInput, editColumnButton, tasks);
 };
 
 const dragNewTasks = (tasks) => {
-  const dragTask = document.querySelectorAll(`.task[id="${tasks.length}"]`);
-  dragTasks(dragTask);
+  const taskForDrag = document.querySelectorAll(`.task[id="${tasks.length}"]`);
+  dragTask(taskForDrag);
 };
 
 export const callBackFunction = (tasks, columnId) => {

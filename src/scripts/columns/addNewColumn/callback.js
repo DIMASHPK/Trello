@@ -1,10 +1,10 @@
-import { openAddingPanel } from "../../openAddingPanel/openAddingPanel";
-import { renderTasks } from "../../renderItems/renderTasks";
-import { tasks } from "../..";
-import { addNewTask } from "../addingTasks/addingTasks";
-import { removeColumn } from "../../removeItems/removeFunc";
-import { editColumns } from "../../editItems/editItems";
-import { dragColumns } from "../../dragItems/dragItems";
+import { removeColumn } from "../removeColumn/removeColumn";
+import { openAddingPanel } from "../../helpers/openAddingPanel";
+import { newTasks } from "../../tasks/tasks";
+import { addNewTask } from "../../tasks/addNewTask/addNewTask";
+import { renderTasks } from "../../tasks/renderTask/renderTask";
+import { editColumn } from "../editColumn/editColumn";
+import { dragColumn } from "../dragColumn/dragColumn";
 
 const closePanelAfterAdding = () => {
   const openNewColumnInputPanel = document.querySelector(".newColumn h2");
@@ -20,7 +20,7 @@ const removeNewColumn = (columns) => {
   const lastColumnRemovButton = document.querySelectorAll(
     `.column__interactionPanel button[data-id="${columns.length}"]`
   );
-  
+
   removeColumn(lastColumnRemovButton, columns);
 };
 
@@ -53,7 +53,8 @@ const addNewTaskToNewColumn = (columns) => {
   const addTaskInput = document.querySelectorAll(
     `div.column[id="${columns.length}"] .addTaskPanel__wrapper .addTask__input`
   );
-  addNewTask(addTaskButton, addTaskInput, tasks, renderTasks);
+
+  addNewTask(addTaskButton, addTaskInput, renderTasks);
 };
 
 const openEditPanel = (columns) => {
@@ -91,15 +92,15 @@ const editColumnTitle = (columns) => {
     `div.column[id="${columns.length}"]  .editColumnTitlePanel__button.ediTitle`
   );
 
-  editColumns(editColumnInput, editColumnButton, columns);
+  editColumn(editColumnInput, editColumnButton, columns);
 };
 
-const dragNewColumns = (columns) => {
+const dragNewColumn = (columns) => {
   const column = document.querySelectorAll(
     `div.column[id="${columns.length}"]`
   );
 
-  dragColumns(column);
+  dragColumn(column);
 };
 
 export const callBackFunction = (columns) => {
@@ -109,5 +110,5 @@ export const callBackFunction = (columns) => {
   addNewTaskToNewColumn(columns);
   openEditPanel(columns);
   editColumnTitle(columns);
-  dragNewColumns(columns);
+  dragNewColumn(columns);
 };

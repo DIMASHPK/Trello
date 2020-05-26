@@ -7,13 +7,14 @@ export const editItems = (inputs, editButtons, arrayOfItems, callback) => {
           dataset: { id },
         },
       }) => {
-        if(inputs[i].value.length < 1){
-          alert('Поле не должно быть пустым')
-          return
+        if (inputs[i].value.length < 1) {
+          alert("Поле не должно быть пустым");
+          return;
         }
         arrayOfItems = arrayOfItems.map((item) =>
           item.id == id ? { ...item, title: inputs[i].value } : item
         );
+
         callback(id, inputs[i]);
       }
     );
@@ -31,23 +32,6 @@ export const editTasks = (inputs, editButtons, arrayOfItems) => {
     );
     content.innerHTML = input.value;
     taskWrapper.classList.remove("hiddenTitle");
-    editPanel.classList.remove("openInputPanel");
-  };
-  editItems(inputs, editButtons, arrayOfItems, callback);
-};
-
-export const editColumns = (inputs, editButtons, arrayOfItems) => {
-  const callback = (id, input) => {
-    const content = document.querySelector(`div.column[id="${id}"] h2`);
-    const titleColumnWrapper = document.querySelector(
-      `div.column[id="${id}"] .column__titleWrap`
-    );
-    const editPanel = document.querySelector(
-      `div.column[id="${id}"] .column__editColumnTitlePanelWrapper `
-    );
-
-    content.innerHTML = input.value;
-    titleColumnWrapper.classList.remove("hiddenTitle");
     editPanel.classList.remove("openInputPanel");
   };
   editItems(inputs, editButtons, arrayOfItems, callback);
