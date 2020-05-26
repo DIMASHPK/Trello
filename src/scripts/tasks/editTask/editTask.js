@@ -10,6 +10,10 @@ export const editTask = (inputs, editButtons, arrayOfItems) => {
       `div.task[id="${id}"] .column__editTaskPanelWrapper`
     );
     content.innerHTML = input.value;
+
+    taskWrapper
+      .closest('[draggable="false"]')
+      .setAttribute("draggable", "true");
     taskWrapper.classList.remove("hiddenTitle");
     editPanel.classList.remove("openInputPanel");
   };

@@ -11,6 +11,9 @@ export const editColumn = (inputs, editButtons, arrayOfItems) => {
     );
 
     content.innerHTML = input.value;
+    titleColumnWrapper
+      .closest('[draggable="false"]')
+      .setAttribute("draggable", "true");
     titleColumnWrapper.classList.remove("hiddenTitle");
     editPanel.classList.remove("openInputPanel");
   };
