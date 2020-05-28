@@ -1,6 +1,5 @@
 import { removeColumn } from "../removeColumn/removeColumn";
 import { openAddingPanel } from "../../helpers/openAddingPanel";
-import { newTasks } from "../../tasks/tasks";
 import { addNewTask } from "../../tasks/addNewTask/addNewTask";
 import { renderTasks } from "../../tasks/renderTask/renderTask";
 import { editColumn } from "../editColumn/editColumn";
@@ -16,26 +15,26 @@ const closePanelAfterAdding = () => {
   newColumnInputPanel.classList.remove("openInputPanel");
 };
 
-const removeNewColumn = (columns) => {
+const removeNewColumn = (columnId) => {
   const lastColumnRemovButton = document.querySelectorAll(
-    `.column__interactionPanel button[data-id="${columns.length}"]`
+    `.column__interactionPanel button[data-id="${columnId}"]`
   );
 
-  removeColumn(lastColumnRemovButton, columns);
+  removeColumn(lastColumnRemovButton);
 };
 
-const openAddingPanelInNewColumn = (columns) => {
+const openAddingPanelInNewColumn = (columnId) => {
   const openNewTaskInputPanel = document.querySelectorAll(
-    `div.column[id="${columns.length}"] .column__addTask`
+    `div.column[id="${columnId}"] .column__addTask`
   );
   const newTaskInputPanel = document.querySelectorAll(
-    `div.column[id="${columns.length}"] .addTaskPanel__wrapper`
+    `div.column[id="${columnId}"] .addTaskPanel__wrapper`
   );
   const newTaskInputPanelInput = document.querySelectorAll(
-    `div.column[id="${columns.length}"] .addTaskPanel__wrapper textarea`
+    `div.column[id="${columnId}"] .addTaskPanel__wrapper textarea`
   );
   const closeNewTaskInputPanel = document.querySelectorAll(
-    `div.column[id="${columns.length}"] .addTaskPanel__wrapper .cancel`
+    `div.column[id="${columnId}"] .addTaskPanel__wrapper .cancel`
   );
 
   openAddingPanel(
@@ -46,32 +45,32 @@ const openAddingPanelInNewColumn = (columns) => {
   );
 };
 
-const addNewTaskToNewColumn = (columns) => {
+const addNewTaskToNewColumn = (columnId) => {
   const addTaskButton = document.querySelectorAll(
-    `div.column[id="${columns.length}"] .addTaskPanel__wrapper .addTask`
+    `div.column[id="${columnId}"] .addTaskPanel__wrapper .addTask`
   );
   const addTaskInput = document.querySelectorAll(
-    `div.column[id="${columns.length}"] .addTaskPanel__wrapper .addTask__input`
+    `div.column[id="${columnId}"] .addTaskPanel__wrapper .addTask__input`
   );
 
-  addNewTask(addTaskButton, addTaskInput, renderTasks);
+  addNewTask(renderTasks, addTaskButton, addTaskInput);
 };
 
-const openEditPanel = (columns) => {
+const openEditPanel = (columnId) => {
   const openEditColumnTitlePanel = document.querySelectorAll(
-    `div.column[id="${columns.length}"] .column__interactionPanel .editButton`
+    `div.column[id="${columnId}"] .column__interactionPanel .editButton`
   );
   const titleEditPanel = document.querySelectorAll(
-    `div.column[id="${columns.length}"] .column__editColumnTitlePanel .column__titleWrap`
+    `div.column[id="${columnId}"] .column__editColumnTitlePanel .column__titleWrap`
   );
   const editColumnTitleInputPanel = document.querySelectorAll(
-    `div.column[id="${columns.length}"] .editColumnTitlePanelWrapper`
+    `div.column[id="${columnId}"] .editColumnTitlePanelWrapper`
   );
   const editColumnTitleInputPanelInput = document.querySelectorAll(
-    `div.column[id="${columns.length}"] .column__editColumnTitlePanel textarea`
+    `div.column[id="${columnId}"] .column__editColumnTitlePanel textarea`
   );
   const closeEditColumnTitleInputPanel = document.querySelectorAll(
-    `div.column[id="${columns.length}"] .editColumnTitlePanelWrapper .cancel`
+    `div.column[id="${columnId}"] .editColumnTitlePanelWrapper .cancel`
   );
 
   openAddingPanel(
@@ -84,31 +83,29 @@ const openEditPanel = (columns) => {
   );
 };
 
-const editColumnTitle = (columns) => {
+const editColumnTitle = (columnId) => {
   const editColumnInput = document.querySelectorAll(
-    `div.column[id="${columns.length}"] textarea.editColumnTitlePanel__input`
+    `div.column[id="${columnId}"] textarea.editColumnTitlePanel__input`
   );
   const editColumnButton = document.querySelectorAll(
-    `div.column[id="${columns.length}"]  .editColumnTitlePanel__button.ediTitle`
+    `div.column[id="${columnId}"]  .editColumnTitlePanel__button.ediTitle`
   );
 
   editColumn(editColumnInput, editColumnButton, columns);
 };
 
-const dragNewColumn = (columns) => {
-  const column = document.querySelectorAll(
-    `div.column[id="${columns.length}"]`
-  );
+const dragNewColumn = (columnId) => {
+  const column = document.querySelectorAll(`div.column[id="${columnId}"]`);
 
   dragColumn(column);
 };
 
-export const callBackFunction = (columns) => {
+export const callBackFunction = (columnId) => {
   closePanelAfterAdding();
-  removeNewColumn(columns);
-  openAddingPanelInNewColumn(columns);
-  addNewTaskToNewColumn(columns);
-  openEditPanel(columns);
-  editColumnTitle(columns);
-  dragNewColumn(columns);
+  removeNewColumn(columnId);
+  openAddingPanelInNewColumn(columnId);
+  addNewTaskToNewColumn(columnId);
+  openEditPanel(columnId);
+  editColumnTitle(columnId);
+  dragNewColumn(columnId);
 };

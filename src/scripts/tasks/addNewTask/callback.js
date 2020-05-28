@@ -2,7 +2,6 @@ import { removeTask } from "../removeTask/removeTask";
 import { openAddingPanel } from "../../helpers/openAddingPanel";
 import { editTask } from "../editTask/editTask";
 import { dragTask } from "../dragTask/dragTask";
-import { dragColumn } from "../../columns/dragColumn/dragColumn";
 
 const closePanelAfterAdd = (columnId) => {
   const closeNewTaskInputPanel = document.querySelector(
@@ -16,12 +15,12 @@ const closePanelAfterAdd = (columnId) => {
   newTaskInputPanel.classList.remove("openInputPanel");
 };
 
-const removeNewTask = (tasks) => {
+const removeNewTask = (taskId) => {
   const newTaskRemovButton = document.querySelectorAll(
-    `.task[id="${tasks.length}"] button.removeButton`
+    `.task[id="${taskId}"] button.removeButton`
   );
 
-  removeTask(newTaskRemovButton, tasks);
+  removeTask(newTaskRemovButton);
 };
 
 const openEditPanel = (columnId) => {
@@ -51,25 +50,25 @@ const openEditPanel = (columnId) => {
   );
 };
 
-const editColumnTask = (columnId, tasks) => {
+const editColumnTask = (columnId) => {
   const editColumnInput = document.querySelectorAll(
     `div.column[id="${columnId}"] textarea.editTaskPanel__textarea`
   );
   const editColumnButton = document.querySelectorAll(
     `div.column[id="${columnId}"]  .editTaskPanel__button.editTask`
   );
-  editTask(editColumnInput, editColumnButton, tasks);
+  editTask(editColumnInput, editColumnButton);
 };
 
-const dragNewTasks = (tasks) => {
-  const taskForDrag = document.querySelectorAll(`.task[id="${tasks.length}"]`);
+const dragNewTasks = (taskId) => {
+  const taskForDrag = document.querySelectorAll(`.task[id="${taskId}"]`);
   dragTask(taskForDrag);
 };
 
-export const callBackFunction = (tasks, columnId) => {
+export const callBackFunction = (taskId, columnId) => {
   closePanelAfterAdd(columnId);
-  removeNewTask(tasks);
+  removeNewTask(taskId);
   openEditPanel(columnId);
-  editColumnTask(columnId, tasks);
-  dragNewTasks(tasks);
+  editColumnTask(columnId);
+  dragNewTasks(taskId);
 };

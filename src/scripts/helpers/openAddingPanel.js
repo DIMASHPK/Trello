@@ -20,9 +20,11 @@ export const openAddingPanel = (
         });
       target.closest('[draggable="true"') &&
         target.closest('[draggable="true"').setAttribute("draggable", "false");
+
       (titleEditPanel ? titleEditPanel[i] : target).classList.add(
         "hiddenTitle"
       );
+
       inputPanel[i].classList.add("openInputPanel");
       input[i].focus();
       forEdit && contentAndResizeOfEditItem();

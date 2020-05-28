@@ -1,4 +1,5 @@
-import { dragedTask } from "../../tasks/dragTask/dragTask";
+import { dragedTask, refreshTasks } from "../../tasks/dragTask/dragTask";
+import { newColumns } from "../columns";
 let dragedColumn = null;
 let dropedColumn = null;
 
@@ -9,22 +10,23 @@ export const dragColumn = (columns) => {
     column.addEventListener("dragstart", function (e) {
       dragedColumn = this;
       this.classList.add("dragstart");
-      console.log(dragedColumn);
+
       tasks.forEach((task) => task.removeAttribute("draggable"));
     });
 
     column.addEventListener("dragend", function () {
-      console.log(dragedColumn);
       dragedColumn.classList.remove("dragstart");
       dragedColumn = null;
       document
         .querySelectorAll(".column")
         .forEach((column) => column.classList.remove("dragover"));
+
       tasks.forEach((task) => task.setAttribute("draggable", "true"));
     });
 
     column.addEventListener("dragover", function (e) {
       e.preventDefault();
+
       if (
         dragedColumn === this ||
         (!dragedColumn &&
@@ -34,6 +36,7 @@ export const dragColumn = (columns) => {
         dropedColumn = null;
         return;
       }
+
       dropedColumn = this;
 
       document
@@ -47,6 +50,7 @@ export const dragColumn = (columns) => {
 
       if (dragedTask) {
         column.querySelector(".column__taskWrapper").append(dragedTask);
+        refreshTasks();
       } else if (dragedColumn) {
         const columns = [
           ...document.querySelectorAll(".column[draggable='true']"),
@@ -63,9 +67,36 @@ export const dragColumn = (columns) => {
             .querySelector(".mainWrapper")
             .insertBefore(dragedColumn, this);
         }
+
+        refreshColumns();
       }
 
       columns.forEach((column) => column.classList.remove("dragover"));
     });
   });
 };
+
+function refreshColumns() {
+  const oldColumns = newColumns.columns;
+
+  newColumns.columns = [
+    ...document.querySelectorAll(".column[draggable='true']"),
+  ].map((column) => ({
+    id: column.id,
+    title: column.querySelector(".column__title").innerHTML,
+    fireBaseId: column.dataset.firebaseid,
+  }));
+
+  newColumns.columns = newColumns.columns.map((column, i) => {
+    const { fireBaseId, ...other } = column;
+
+    fetch(
+      `https://trello-82cb9.firebaseio.com/columns/${oldColumns[i].fireBaseId}.json`,
+      {
+        method: "PATCH",
+        body: JSON.stringify({ ...other }),
+      }
+    );
+    return { ...column, fireBaseId: oldColumns[i].fireBaseId };
+  });
+}

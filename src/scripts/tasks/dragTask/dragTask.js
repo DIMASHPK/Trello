@@ -1,3 +1,5 @@
+import { newTasks } from "../tasks";
+
 export let dragedTask = null;
 
 export const dragTask = (tasks) => {
@@ -33,6 +35,7 @@ export const dragTask = (tasks) => {
     });
     task.addEventListener("drop", function (e) {
       e.stopPropagation();
+
       if (this === dragedTask || !dragedTask) return;
       this.classList.remove("dragover");
 
@@ -50,6 +53,34 @@ export const dragTask = (tasks) => {
       } else {
         this.parentElement.insertBefore(dragedTask, this);
       }
+
+      refreshTasks();
     });
   });
 };
+
+export function refreshTasks() {
+  const oldTasks = newTasks.tasks.sort((a, b) => +a.columnId - +b.columnId);
+
+  newTasks.tasks = [...document.querySelectorAll(".column__task")].map(
+    (task) => ({
+      id: task.id,
+      title: task.querySelector(".task__title").innerHTML,
+      columnId: task.closest(".column").id,
+      fireBaseId: task.dataset.firebaseid,
+    })
+  );
+
+  newTasks.tasks = newTasks.tasks.map((task, i) => {
+    const { fireBaseId, ...other } = task;
+
+    fetch(
+      `https://trello-82cb9.firebaseio.com/tasks/${oldTasks[i].fireBaseId}.json`,
+      {
+        method: "PATCH",
+        body: JSON.stringify({ ...other }),
+      }
+    );
+    return { ...task, fireBaseId: oldTasks[i].fireBaseId };
+  });
+}

@@ -2,12 +2,12 @@ export const renderTasks = (tasks) => {
   const tasksWrapper = document.querySelectorAll(".column__taskWrapper");
 
   (Array.isArray(tasks) ? tasks : [tasks]).forEach(
-    ({ id, title, columnId }) => {
+    ({ id, title, columnId, fireBaseId }) => {
       tasksWrapper.forEach((taskWrapper) => {
         if (taskWrapper.id == columnId) {
           taskWrapper.insertAdjacentHTML(
             "beforeend",
-            `<div class="column__task task" id=${id} draggable="true">
+            `<div class="column__task task" id=${id} draggable="true" data-fireBaseId=${fireBaseId}>
                <div class="task__wrapper">   
                 <div class="task__interactionPanel interactionPanel">
                   <button class="interactionPanel__button editButton">&#9998;</button>

@@ -1,12 +1,11 @@
 export const renderColumn = (columns) => {
   const newColumn = document.querySelector(".newColumnWrapper");
 
-  (Array.isArray(columns) ? columns : [columns]).forEach(({ id, title }) => {
-    const div = document.createElement("div");
-    div.classList.add("column");
-    newColumn.insertAdjacentHTML(
-      "beforebegin",
-      `<div class='column' id=${id} draggable="true">
+  (Array.isArray(columns) ? columns : [columns]).forEach(
+    ({ id, title, fireBaseId }) => {
+      newColumn.insertAdjacentHTML(
+        "beforebegin",
+        `<div class='column draggedColumn' id=${id} draggable="true" data-firebaseid=${fireBaseId}>
          <div class="column__editColumnTitlePanel editColumnTitlePanel">
             <div class="column__titleWrap">
               <h2 class="column__title">${title}</h2>
@@ -52,6 +51,7 @@ export const renderColumn = (columns) => {
             </div>
           </div>
        </div>`
-    );
-  });
+      );
+    }
+  );
 };
