@@ -39,9 +39,10 @@ export const editItems = (inputs, editButtons) => {
         );
         content.innerHTML = inputs[i].value;
 
-        taskWrapper
-          .closest('[draggable="false"]')
-          .setAttribute("draggable", "true");
+        taskWrapper.closest('[draggable="false"]') &&
+          taskWrapper
+            .closest('[draggable="false"]')
+            .setAttribute("draggable", "true");
         taskWrapper.classList.remove("hiddenTitle");
         editPanel.classList.remove("openInputPanel");
       }

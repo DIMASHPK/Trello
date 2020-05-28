@@ -48,13 +48,15 @@ const editItems = (inputs, editButtons) => {
   });
 };
 
-export const editColumn = () => {
-  const editColumnInputs = document.querySelectorAll(
-    "textarea.editColumnTitlePanel__input"
-  );
-  const editColumnButtons = document.querySelectorAll(
-    ".column  .editColumnTitlePanel__button.ediTitle"
-  );
+export const editColumn = (editInput, editButton) => {
+  const editColumnInputs =
+    editInput ||
+    document.querySelectorAll("textarea.editColumnTitlePanel__input");
+  const editColumnButtons =
+    editButton ||
+    document.querySelectorAll(
+      ".column  .editColumnTitlePanel__button.ediTitle"
+    );
 
   editItems(editColumnInputs, editColumnButtons);
 };

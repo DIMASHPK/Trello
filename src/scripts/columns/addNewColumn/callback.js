@@ -91,7 +91,7 @@ const editColumnTitle = (columnId) => {
     `div.column[id="${columnId}"]  .editColumnTitlePanel__button.ediTitle`
   );
 
-  editColumn(editColumnInput, editColumnButton, columns);
+  editColumn(editColumnInput, editColumnButton);
 };
 
 const dragNewColumn = (columnId) => {
