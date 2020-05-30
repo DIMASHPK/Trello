@@ -1,4 +1,5 @@
 import { newTasks } from "../tasks";
+import { tasksApi } from "../../api/api";
 
 export let dragedTask = null;
 
@@ -74,13 +75,10 @@ export function refreshTasks() {
   newTasks.tasks = newTasks.tasks.map((task, i) => {
     const { fireBaseId, ...other } = task;
 
-    fetch(
-      `https://trello-82cb9.firebaseio.com/tasks/${oldTasks[i].fireBaseId}.json`,
-      {
-        method: "PATCH",
-        body: JSON.stringify({ ...other }),
-      }
-    );
+    fetch(tasksApi(oldTasks[i].fireBaseId), {
+      method: "PATCH",
+      body: JSON.stringify({ ...other }),
+    });
     return { ...task, fireBaseId: oldTasks[i].fireBaseId };
   });
 }

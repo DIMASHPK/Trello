@@ -1,4 +1,5 @@
 import { newTasks } from "../tasks";
+import { tasksApi } from "../../api/api";
 
 export const editItems = (inputs, editButtons) => {
   editButtons.forEach((button, i) => {
@@ -18,13 +19,10 @@ export const editItems = (inputs, editButtons) => {
           const { fireBaseId, ...other } = item;
 
           if (item.id == id) {
-            fetch(
-              `https://trello-82cb9.firebaseio.com/tasks/${fireBaseId}.json`,
-              {
-                method: "PATCH",
-                body: JSON.stringify({ ...other, title: inputs[i].value }),
-              }
-            );
+            fetch(tasksApi(fireBaseId), {
+              method: "PATCH",
+              body: JSON.stringify({ ...other, title: inputs[i].value }),
+            });
             return { ...item, title: inputs[i].value };
           }
           return item;

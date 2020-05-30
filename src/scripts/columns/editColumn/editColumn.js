@@ -1,4 +1,5 @@
 import { newColumns } from "../columns";
+import { columnsApi } from "../../api/api";
 
 const editItems = (inputs, editButtons) => {
   editButtons.forEach((button, i) => {
@@ -17,13 +18,10 @@ const editItems = (inputs, editButtons) => {
         newColumns.columns = newColumns.columns.map((item) => {
           const { fireBaseId, ...other } = item;
           if (item.id == id) {
-            fetch(
-              `https://trello-82cb9.firebaseio.com/columns/${fireBaseId}.json`,
-              {
-                method: "PATCH",
-                body: JSON.stringify({ ...other, title: inputs[i].value }),
-              }
-            );
+            fetch(columnsApi(fireBaseId), {
+              method: "PATCH",
+              body: JSON.stringify({ ...other, title: inputs[i].value }),
+            });
             return { ...item, title: inputs[i].value };
           }
           return item;

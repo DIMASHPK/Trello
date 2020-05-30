@@ -27,8 +27,9 @@ export const addNewTask = (renderFunc, addTaskButtons, addTaskInput) => {
           title: inputs[i].value,
           columnId: id,
         };
+        const token = localStorage.getItem("token");
 
-        fetch(tasksMainApiUrl, {
+        fetch(tasksMainApiUrl(token), {
           method: "POST",
           body: JSON.stringify(newElem),
         })

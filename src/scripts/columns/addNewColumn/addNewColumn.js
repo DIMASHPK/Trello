@@ -30,8 +30,9 @@ export const addNewColumn = (renderFunc) => {
             id: `${newColumnId}`,
             title: newColumnInput[i].value,
           };
+          const token = localStorage.getItem("token");
 
-          fetch(columnsMainApiUrl, {
+          fetch(columnsMainApiUrl(token), {
             method: "POST",
             body: JSON.stringify(newElem),
           })

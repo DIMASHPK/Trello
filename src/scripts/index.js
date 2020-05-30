@@ -3,26 +3,35 @@ import "../styles/styles.scss";
 import { newColumns } from "./columns/columns";
 import { newTasks } from "./tasks/tasks";
 import { tasksMainApiUrl, columnsMainApiUrl } from "./api/api";
+import { auth } from "./auth/auth";
+import { preloader } from "./preloader/preloader";
+import { logOut } from "./logOut/logOut";
 
-(async () => {
-  const columnsRequest = await fetch(columnsMainApiUrl);
+const token = localStorage.getItem("token");
+
+const initContentFunc = async (idToken) => {
+  document.body.insertAdjacentHTML("afterbegin", preloader());
+
+  const columnsRequest = await fetch(columnsMainApiUrl(idToken));
   const columnsResponse = await columnsRequest.json();
   const columnsArray = Object.entries(columnsResponse).map((column) => ({
     fireBaseId: column[0],
     ...column[1],
   }));
 
-  newColumns.columns = [...newColumns.columns, ...columnsArray];
+  newColumns.columns = [...columnsArray];
 
-  const tasksRequest = await fetch(tasksMainApiUrl);
+  const tasksRequest = await fetch(tasksMainApiUrl(idToken));
   const tasksResponse = await tasksRequest.json();
   const tasksArray = Object.entries(tasksResponse).map((task) => ({
     fireBaseId: task[0],
     ...task[1],
   }));
-  newTasks.tasks = [...newTasks.tasks, ...tasksArray];
+  newTasks.tasks = [...tasksArray];
 
-  /* columns  */
+  document.querySelector(".preloader").remove();
+  document.querySelector(".newColumnWrapper").style.display = "block";
+
   newColumns.renderColumn();
   newColumns.removeColumn();
   newColumns.openNewColumnPanel();
@@ -31,7 +40,6 @@ import { tasksMainApiUrl, columnsMainApiUrl } from "./api/api";
   newColumns.editColumn();
   newColumns.dragColumn();
 
-  /* tasks */
   newTasks.renderTask();
   newTasks.removeTask();
   newTasks.openNewTaskPanel();
@@ -39,4 +47,8 @@ import { tasksMainApiUrl, columnsMainApiUrl } from "./api/api";
   newTasks.openEditTaskPanel();
   newTasks.editTask();
   newTasks.dragTask();
-})();
+};
+
+token && token.length && logOut(initContentFunc);
+
+token && token.length > 0 ? initContentFunc(token) : auth(initContentFunc);

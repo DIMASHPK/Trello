@@ -18,8 +18,8 @@ export const openAddingPanel = (
           elem.getAttribute("draggable") === "false" &&
             elem.setAttribute("draggable", "true");
         });
-      target.closest('[draggable="true"') &&
-        target.closest('[draggable="true"').setAttribute("draggable", "false");
+      target.closest('[draggable="true"]') &&
+        target.closest('[draggable="true"]').setAttribute("draggable", "false");
 
       (titleEditPanel ? titleEditPanel[i] : target).classList.add(
         "hiddenTitle"

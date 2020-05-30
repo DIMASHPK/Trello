@@ -1,5 +1,6 @@
 import { dragedTask, refreshTasks } from "../../tasks/dragTask/dragTask";
 import { newColumns } from "../columns";
+import { columnsApi } from "../../api/api";
 let dragedColumn = null;
 let dropedColumn = null;
 
@@ -90,13 +91,10 @@ function refreshColumns() {
   newColumns.columns = newColumns.columns.map((column, i) => {
     const { fireBaseId, ...other } = column;
 
-    fetch(
-      `https://trello-82cb9.firebaseio.com/columns/${oldColumns[i].fireBaseId}.json`,
-      {
-        method: "PATCH",
-        body: JSON.stringify({ ...other }),
-      }
-    );
+    fetch(columnsApi(oldColumns[i].fireBaseId), {
+      method: "PATCH",
+      body: JSON.stringify({ ...other }),
+    });
     return { ...column, fireBaseId: oldColumns[i].fireBaseId };
   });
 }
